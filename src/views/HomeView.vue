@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <Header />
+  <Body />
+  <TopLink />
+  <Footer />
+  <Preloader v-if="loading" />
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Header from '@/components/Header/Header.vue'
+import Body from '@/components/Body/Body.vue'
+import TopLink from '@/components/Body/TopLink.vue'
+import Footer from '@/components/Footer/Footer.vue'
+import Preloader from '@/components/Preloader.vue'
 
 export default {
   name: 'HomeView',
+  data() {
+    return {
+      loading: true,
+    }
+  },
   components: {
-    HelloWorld
-  }
+    Header,
+    Body,
+    TopLink,
+    Footer,
+    Preloader,
+  },
+  mounted() {
+    window.addEventListener('load', () => (this.loading = false))
+  },
 }
 </script>

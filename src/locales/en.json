@@ -1,0 +1,51 @@
+{
+  "header": {
+    "navbar": {
+      "home": "Home",
+      "about": "About",
+      "format": "Book Format",
+      "form": "Form"
+    },
+    "banner": {
+      "title": "War From A Chat Window",
+      "description": "A project that wants to show reality and harshness of the war by sharing text messages of the ordinary people right from the conflict's hotspot",
+      "button": "share your story"
+    }
+  },
+  "body": {
+    "about": {
+      "title": "about the project",
+      "buttons": {
+        "idea": "Idea",
+        "inspiration": "Inspiration",
+        "goals": "Goals"
+      },
+      "idea": {
+        "title": "How the idea was born",
+        "firstParagraph": "Na začátku července 2022 mi maminka mojí přítelkyně dala přečíst konverzaci s její známou, která prožila 2 dny v ukrajinském Nikopolu, když město z druhého břehu Dněpru ostřelovali ruské jednotky.",
+        "secondParagraph": "Slovy nejde popsat, jak na mě čtení těch pár řádků zapůsobilo - je to úplně něco jiného, než když člověk čte zprávy v médiích od novináře, který již má informace z druhé nebo třetí ruky. Tehdy mě napadlo, že by bylo možné podobné zprávy postupně nashromáždit, přeložit je (nejen do češtiny) a publikovat."
+      },
+      "inspiration": {
+        "title": "Inspiration",
+        "firstParagraph": "Inspirací mi byly dvě knihy: <i>Dopisy ze Sachsenhausenu</i> a <i>Terapie sdílením</i>.",
+        "secondParagraph": "První kniha mě inspirovala myšlenkou, že je možné poukázat na tvrdou realitu skrze osobní korespondenci. To mi přijde velmi efektivní z toho důvodu, že nejde o jakousi \"depersonalizovanou\" reportáž v médiích, ale o popis situace z první ruky se všemi emocemi onoho momentu.",
+        "thirdParagraph": "Druhá kniha mě inspirovala svým formátem. Líbí se mi myšlenka, že jednotlivé stránky vizuálně vypadají jako okénka chatu. Lidé zasaženi konfliktem spolu komunikují skrze aplikace, které všichni známe z každodenního života. Přijde mi vhodné, aby byl při vydání zachován formát, v jakém zprávy byly poslány."
+      },
+      "goals": {
+        "title": "Můj cíl",
+        "firstParagraph": "Mým cílem je nashromáždit elektronickou korespondenci lidí z Ukrajiny zasažených konfliktem, přeložit ji a vydat v rámci knihy. Pojďmě lidem v ČR (a v EU) skrze osobní příběhy ukázat, že útočná válka ruské federace na Ukrajině není něco, co nás nemusí zajímat a co se děje někde daleko. Pojďme ukázat, jaké následky mají obchodní vztahy západních zemí se zločinnými režimy jako je rusko nebo ČLR a jak je nakonec snadné si na místě Ukrajinců představit nás."
+      }
+    },
+    "format": {
+      "title": "book format",
+      "description": {
+        "firstParagraph": "Formát knihy bych si představoval tak, aby stránky vypadaly jako okénka chatu, podobně jako například v aplikacích Messenger nebo Telegram. Myslím si, že se čtenáři dokáži lépe vcítit do válkou postižených lidí, pokud sdílené zprávy vidí ve formátu, se kterým přichází do styku každý den. Mimo jiné to podle mě nejvíce zachovává autentičnost takových zpráv.",
+        "secondParagraph": "Ačkoli tyto zprávy budou hlavním předmětem knihy, nechtěl bych se striktně soustředit pouze na ně. Neváhám do knihy zasadit ani různé fotky, pokud autor bude souhlasit s jejich publikováním. Zároveň bych chtěl stránky sem tam prokládat obrázky vygenerovanými neurnovou sítí podle textu z některých sdílených zpráv.",
+        "thirdParagraph": "Na příklad několika stránek knihy se můžete podívat zde:"
+      }
+    },
+    "form": {}
+  },
+  "footer": "",
+  "langSwitcher": "Language"
+}
