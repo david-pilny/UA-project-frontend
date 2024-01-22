@@ -64,6 +64,7 @@
 <script>
 export default {
   name: 'About',
+
   data() {
     return {
       categories: ['history', 'vision', 'goals'],
@@ -80,12 +81,14 @@ export default {
       bannerImg: require('@/media/about-banner.png'),
     }
   },
+
   created() {
     this.displayCategory('history')
   },
+
   methods: {
     displayCategory(category) {
-      Object.keys(this.activeClasses).forEach((classKey) => {
+      this.categories.forEach((classKey) => {
         this.activeClasses[classKey] = ''
         if (classKey === category) this.activeClasses[classKey] += 'active'
       })

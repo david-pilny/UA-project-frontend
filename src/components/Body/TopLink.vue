@@ -1,6 +1,6 @@
 <template>
   <!-- back to top button -->
-  <a href="#home" class="scroll-link top-link" ref="topLink">
+  <a href="#home" :class="`scroll-link top-link ${topLink}`">
     <i class="fas fa-arrow-up"></i>
   </a>
 </template>
@@ -8,35 +8,33 @@
 <script>
 export default {
   name: 'TopLink',
+  
   data() {
     return {
-      topLink: '',
-      nav: '',
+      navbar: '',
+      topLink: ''
     }
   },
+
   created() {
     window.addEventListener('scroll', this.handleScroll)
   },
-  destroyed() {
+
+  unmounted () {
     window.removeEventListener('scroll', this.handleScroll)
   },
+  
   methods: {
-    handleScroll(event) {
+    handleScroll() {
       const scrollHeight = window.pageYOffset
-      const navHeight = this.nav.getBoundingClientRect().height
+      const navHeight = document.getElementById('nav').getBoundingClientRect().height
 
       if (scrollHeight > navHeight) {
-        // this.nav.classList.add('fixed-nav')
-        this.topLink.classList.add('show-link')
-      } else {
-        // this.nav.classList.remove('fixed-nav')
-        this.topLink.classList.remove('show-link')
-      }
+        this.topLink = 'show-link'
+        return
+      } 
+      this.topLink = ''
     },
-  },
-  mounted() {
-    this.topLink = this.$refs.topLink
-    this.nav = document.getElementById('nav')
   },
 }
 </script>

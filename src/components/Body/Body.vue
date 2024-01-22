@@ -11,6 +11,7 @@ import Form from '@/components/Body/Form/Form.vue'
 
 export default {
   name: 'Body',
+
   components: {
     About,
     Format,

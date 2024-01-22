@@ -113,6 +113,7 @@ export default {
     ModalSuccess,
     ModalBadTypeFile,
   },
+  
   data() {
     return {
       email: '',
@@ -123,6 +124,7 @@ export default {
       badFileType: false,
     }
   },
+
   setup() {
     const modalActive = ref(false)
 

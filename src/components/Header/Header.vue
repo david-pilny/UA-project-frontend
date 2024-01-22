@@ -12,6 +12,7 @@ import Banner from '@/components/Header/Banner.vue'
 
 export default {
   name: 'Header',
+
   components: {
     Navbar,
     Banner,
