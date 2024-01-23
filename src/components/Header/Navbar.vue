@@ -1,6 +1,6 @@
 <template>
   <!-- navbar -->
-  <nav id="nav" ref="nav">
+  <nav id="nav" ref="nav" :class="fixedNav">
     <div class="nav-center">
       <!-- nav header -->
       <div class="nav-header">
@@ -14,28 +14,18 @@
       </div>
 
       <!-- links -->
-      <div class="links-container" ref="linksContainer">
+      <div
+        class="links-container"
+        :style="linksContainerStyle"
+        ref="linksContainer"
+      >
         <ul class="links" ref="links">
-          <li>
-            <a href="#home" class="scroll-link">{{
-              $t('header.navbar.home')
+          <li v-for="link in navbarLinks" :key="link.href">
+            <a :href="link.href" class="scroll-link" @click="handleLinkClick">{{
+              link.label
             }}</a>
           </li>
-          <li>
-            <a href="#about" class="scroll-link">{{
-              $t('header.navbar.about')
-            }}</a>
-          </li>
-          <li>
-            <a href="#services" class="scroll-link">{{
-              $t('header.navbar.format')
-            }}</a>
-          </li>
-          <li>
-            <a href="#tours" class="scroll-link">{{
-              $t('header.navbar.form')
-            }}</a>
-          </li>
+
           <li>
             <select
               name="language"
@@ -59,80 +49,110 @@
 <script>
 export default {
   name: 'Navbar',
+
   data() {
     return {
-      nav: '',
-      linksContainer: '',
-      links: '',
+      fixedNav: '',
       langPlaceholder: '',
+      linksContainerStyle: {
+        height: '0',
+      },
     }
   },
+
+  computed: {
+    navbarLinks() {
+      return [
+        {
+          href: '#home',
+          label: this.$t('header.navbar.home'),
+        },
+        {
+          href: '#about',
+          label: this.$t('header.navbar.about'),
+        },
+        {
+          href: '#services',
+          label: this.$t('header.navbar.format'),
+        },
+        {
+          href: '#tours',
+          label: this.$t('header.navbar.form'),
+        },
+      ]
+    },
+  },
+
   created() {
     window.addEventListener('scroll', this.handleScroll)
   },
-  destroyed() {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
-  methods: {
-    handleScroll(event) {
-      const scrollHeight = window.pageYOffset
-      const navHeight = this.nav.getBoundingClientRect().height
 
-      if (scrollHeight > navHeight) {
-        this.nav.classList.add('fixed-nav')
-      } else {
-        this.nav.classList.remove('fixed-nav')
-      }
+  methods: {
+    containerHeight() {
+      return this.$refs.linksContainer.getBoundingClientRect().height
     },
-    navToggle() {
-      const containerHeight = this.linksContainer.getBoundingClientRect().height
-      const linksHeight = this.links.getBoundingClientRect().height
-      if (containerHeight === 0) {
-        this.linksContainer.style.height = `${linksHeight}px`
-      } else {
-        this.linksContainer.style.height = 0
-      }
+
+    linksHeight() {
+      return this.$refs.links.getBoundingClientRect().height
     },
-    changeRoute(e) {
-      this.$router.push('/' + e.target.value)
+
+    navbarHeight() {
+      return this.$refs.nav.getBoundingClientRect().height
+    },
+
+    changeRoute(event) {
+      this.$router.push('/' + event.target.value)
       this.langPlaceholder.selected = true
     },
-  },
-  mounted() {
-    this.nav = this.$refs.nav
-    this.linksContainer = this.$refs.linksContainer
-    this.links = this.$refs.links
-    this.langPlaceholder = this.$refs.langPlaceholder
 
-    const scrollLinks = document.querySelectorAll('.scroll-link')
+    handleScroll() {
+      const scrollHeight = window.pageYOffset
 
-    scrollLinks.forEach((scrollLink) => {
-      scrollLink.addEventListener('click', (e) => {
-        // prevent default
-        e.preventDefault()
-        // navigate to a specific section
-        const id = e.currentTarget.getAttribute('href').slice(1)
-        const element = document.getElementById(id)
-        const navHeight = this.nav.getBoundingClientRect().height
-        const containerHeight =
-          this.linksContainer.getBoundingClientRect().height
-        const fixedNav = this.nav.classList.contains('fixed-nav')
-        let position = element.offsetTop - navHeight
+      if (scrollHeight > this.navbarHeight()) {
+        this.fixedNav = 'fixed-nav'
+        return
+      }
+      this.fixedNav = ''
+    },
 
-        if (!fixedNav) {
-          position -= navHeight
-        }
+    handleLinkClick(event) {
+      // prevent default
+      event.preventDefault()
 
-        if (navHeight > 82) {
-          position += containerHeight
-        }
-        window.scrollTo({
-          left: 0,
-          top: position,
-        })
-        this.linksContainer.style.height = 0
+      // navigate to a specific section
+      const id = event.currentTarget.getAttribute('href').slice(1)
+      const element = document.getElementById(id)
+      let position = element.offsetTop - this.navbarHeight()
+
+      if (!this.fixedNav) {
+        position -= this.navbarHeight()
+      }
+
+      if (this.navbarHeight() > 82) {
+        position += this.containerHeight()
+      }
+      window.scrollTo({
+        left: 0,
+        top: position,
       })
-    })
+      this.linksContainerStyle.height = '0'
+    },
+
+    navToggle() {
+      if (this.containerHeight() === 0) {
+        this.linksContainerStyle.height = `${this.linksHeight()}px`
+      } else {
+        this.linksContainerStyle.height = '0'
+      }
+    },
+  },
+
+  mounted() {
+    this.langPlaceholder = this.$refs.langPlaceholder
+  },
+
+  unmounted() {
+    window.removeEventListener('scroll', this.handleScroll)
   },
 }
 </script>

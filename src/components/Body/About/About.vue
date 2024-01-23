@@ -12,23 +12,18 @@
         <!-- btn container -->
         <div class="btn-container">
           <button
-            v-on:click="displayHistory"
-            class="tab-btn active"
-            ref="historyBtn"
+            v-for="category in categories"
+            v-on:click="displayCategory(category)"
+            :class="`tab-btn ${activeClasses[category]}`"
+            :key="category"
           >
-            {{ $t('body.about.buttons.idea') }}
-          </button>
-          <button v-on:click="displayVision" class="tab-btn" ref="visionBtn">
-            {{ $t('body.about.buttons.inspiration') }}
-          </button>
-          <button v-on:click="displayGoals" class="tab-btn" ref="goalsBtn">
-            {{ $t('body.about.buttons.goals') }}
+            {{ $t(translations[category]) }}
           </button>
         </div>
 
         <div class="about-content">
           <!-- single item -->
-          <div class="content active" ref="history">
+          <div :class="`content ${activeClasses.history}`">
             <h4>{{ $t('body.about.idea.title') }}</h4>
             <p>
               {{ $t('body.about.idea.firstParagraph') }}
@@ -40,7 +35,7 @@
           <!-- end of single item -->
 
           <!-- single item -->
-          <div class="content" ref="vision">
+          <div :class="`content ${activeClasses.vision}`">
             <h4>{{ $t('body.about.inspiration.title') }}</h4>
             <p v-html="$t('body.about.inspiration.firstParagraph')"></p>
             <p>
@@ -53,7 +48,7 @@
           <!-- end of single item -->
 
           <!-- single item -->
-          <div class="content" ref="goals">
+          <div :class="`content ${activeClasses.goals}`">
             <h4>{{ $t('body.about.goals.title') }}</h4>
             <p>
               {{ $t('body.about.goals.firstParagraph') }}
@@ -69,74 +64,34 @@
 <script>
 export default {
   name: 'About',
+
   data() {
     return {
+      categories: ['history', 'vision', 'goals'],
+      activeClasses: {
+        history: '',
+        vision: '',
+        goals: '',
+      },
+      translations: {
+        history: 'body.about.buttons.idea',
+        vision: 'body.about.buttons.inspiration',
+        goals: 'body.about.buttons.goals',
+      },
       bannerImg: require('@/media/about-banner.png'),
     }
   },
+
+  created() {
+    this.displayCategory('history')
+  },
+
   methods: {
-    displayHistory() {
-      const historyTab = this.$refs.history
-      const visionTab = this.$refs.vision
-      const goalsTab = this.$refs.goals
-
-      const historyBtn = this.$refs.historyBtn
-      const visionBtn = this.$refs.visionBtn
-      const goalsBtn = this.$refs.goalsBtn
-
-      if (!historyTab.classList.contains('active')) {
-        historyTab.classList.add('active')
-      }
-      visionTab.classList.remove('active')
-      goalsTab.classList.remove('active')
-
-      if (!historyBtn.classList.contains('active')) {
-        historyBtn.classList.add('active')
-      }
-      visionBtn.classList.remove('active')
-      goalsBtn.classList.remove('active')
-    },
-    displayVision() {
-      const historyTab = this.$refs.history
-      const visionTab = this.$refs.vision
-      const goalsTab = this.$refs.goals
-
-      const historyBtn = this.$refs.historyBtn
-      const visionBtn = this.$refs.visionBtn
-      const goalsBtn = this.$refs.goalsBtn
-
-      if (!visionTab.classList.contains('active')) {
-        visionTab.classList.add('active')
-      }
-      historyTab.classList.remove('active')
-      goalsTab.classList.remove('active')
-
-      if (!visionBtn.classList.contains('active')) {
-        visionBtn.classList.add('active')
-      }
-      historyBtn.classList.remove('active')
-      goalsBtn.classList.remove('active')
-    },
-    displayGoals() {
-      const historyTab = this.$refs.history
-      const visionTab = this.$refs.vision
-      const goalsTab = this.$refs.goals
-
-      const historyBtn = this.$refs.historyBtn
-      const visionBtn = this.$refs.visionBtn
-      const goalsBtn = this.$refs.goalsBtn
-
-      if (!goalsTab.classList.contains('active')) {
-        goalsTab.classList.add('active')
-      }
-      visionTab.classList.remove('active')
-      historyTab.classList.remove('active')
-
-      if (!goalsBtn.classList.contains('active')) {
-        goalsBtn.classList.add('active')
-      }
-      historyBtn.classList.remove('active')
-      visionBtn.classList.remove('active')
+    displayCategory(category) {
+      this.categories.forEach((classKey) => {
+        this.activeClasses[classKey] = ''
+        if (classKey === category) this.activeClasses[classKey] += 'active'
+      })
     },
   },
 }

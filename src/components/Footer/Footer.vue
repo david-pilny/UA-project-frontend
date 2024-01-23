@@ -11,11 +11,13 @@
 <script>
 export default {
   name: 'Footer',
+
   data() {
     return {
       date: '',
     }
   },
+  
   mounted() {
     this.date = new Date().getFullYear()
   },
