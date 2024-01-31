@@ -1,6 +1,6 @@
 <template>
   <!-- services -->
-  <section id="services" class="section">
+  <section id="format" class="section">
     <div class="title">
       <h2>{{ $t('body.format.title') }}</h2>
     </div>
@@ -35,4 +35,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+h2 {
+  /* color: var(--clr-jet); */
+  color: var(--clr-glaucous);
+}
+</style>

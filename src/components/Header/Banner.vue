@@ -6,7 +6,7 @@
       <p>
         {{ $t('header.banner.description') }}
       </p>
-      <a href="#tours" class="scroll-link btn btn-white">{{
+      <a href="#form" class="scroll-link btn btn-white">{{
         $t('header.banner.button')
       }}</a>
     </div>

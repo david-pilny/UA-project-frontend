@@ -98,6 +98,10 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  color: var(--clr-saffron);
+}
+
 .about-content {
   border-bottom-left-radius: var(--radius);
   border-bottom-right-radius: var(--radius);

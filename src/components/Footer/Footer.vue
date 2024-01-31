@@ -17,7 +17,7 @@ export default {
       date: '',
     }
   },
-  
+
   mounted() {
     this.date = new Date().getFullYear()
   },
@@ -26,7 +26,7 @@ export default {
 
 <style scoped>
 footer {
-  background: var(--clr-grey-1);
+  background: var(--clr-jet);
   padding: 5rem 1rem;
 }
 footer p {

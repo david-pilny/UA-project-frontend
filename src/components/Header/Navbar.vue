@@ -72,7 +72,7 @@ export default {
           label: this.$t('header.navbar.about'),
         },
         {
-          href: '#services',
+          href: '#format',
           label: this.$t('header.navbar.format'),
         },
         {
@@ -160,7 +160,7 @@ export default {
 <style scoped>
 /* navbar */
 nav {
-  background: var(--clr-white);
+  background: var(--ash-gray);
   padding: 1rem 1.5rem;
 }
 /* fixed nav */
@@ -169,7 +169,8 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--clr-white);
+  /* background: var(--clr-white); */
+  background: var(--ash-gray);
   box-shadow: var(--light-shadow);
   z-index: 1;
 }
@@ -217,8 +218,8 @@ nav {
   height: 200px;
 }
 .links a {
-  background: var(--clr-white);
-  color: var(--clr-grey-5);
+  background: var(--ash-gray);
+  color: var(--clr-jet);
   font-size: 1.1rem;
   text-transform: none;
   letter-spacing: var(--spacing);

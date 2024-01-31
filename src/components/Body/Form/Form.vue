@@ -1,6 +1,6 @@
 <template>
-  <!-- tours -->
-  <section id="tours" class="section">
+  <!-- form -->
+  <section id="form" class="section">
     <div class="title">
       <h2>sdílejte svůj příběh</h2>
     </div>
@@ -113,7 +113,7 @@ export default {
     ModalSuccess,
     ModalBadTypeFile,
   },
-  
+
   data() {
     return {
       email: '',
