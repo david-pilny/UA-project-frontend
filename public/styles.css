@@ -12,6 +12,18 @@ Variables
 */
 
 :root {
+  /* CSS HEX */
+  --jet: #373737ff;
+  --onyx: #3d3d3dff;
+  --onyx-2: #434343ff;
+  --davys-gray: #4a4a4aff;
+  --davys-gray-2: #515151ff;
+  --davys-gray-3: #595959ff;
+  --gray: #7f7f7fff;
+  --silver: #a5a5a5ff;
+  --silver-2: #ccccccff;
+  --white-smoke: #f2f2f2ff;
+
   /* dark shades of primary color*/
   --clr-primary-1: hsl(205, 86%, 17%);
   --clr-primary-2: hsl(205, 77%, 27%);
@@ -73,7 +85,7 @@ html {
 }
 body {
   font-family: var(--ff-secondary);
-  background: var(--clr-grey-10);
+  background: var(--white-smoke);
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
@@ -115,7 +127,7 @@ h4 {
 }
 p {
   margin-bottom: 1.25rem;
-  color: var(--clr-grey-5);
+  color: var(--jet);
 }
 @media screen and (min-width: 800px) {
   h1 {
@@ -220,20 +232,20 @@ main {
   color: var(--clr-secondary);
 }
 #about,
-#services,
+#format,
 #tours {
   height: auto;
 }
 
-#services {
-  background: var(--clr-white);
+#format {
+  background: var(--silver-2);
 }
 
-#services .title {
+#format .title {
   margin-bottom: 1%;
 }
 @media screen and (min-width: 768px) {
-  #services .title {
+  #format .title {
     margin-bottom: 5%;
   }
 }
@@ -368,7 +380,7 @@ form css
   }
 }
 .note-primary {
-  background-color: var(--clr-grey-10);
+  background-color: var(--white-smoke);
   /* border-color: var(--clr-primary-4); */
 }
 

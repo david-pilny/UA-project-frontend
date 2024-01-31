@@ -112,7 +112,7 @@ export default {
 .carousel {
   display: flex;
   justify-content: center;
-  border: 5px solid var(--clr-primary-4);
+  border: 5px solid var(--gray);
   width: 50vw;
   height: 70vw;
   margin: 0 auto;

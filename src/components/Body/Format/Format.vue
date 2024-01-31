@@ -1,6 +1,6 @@
 <template>
-  <!-- services -->
-  <section id="services" class="section">
+  <!-- format -->
+  <section id="format" class="section">
     <div class="title">
       <h2>{{ $t('body.format.title') }}</h2>
     </div>
