@@ -8,11 +8,11 @@
 <script>
 export default {
   name: 'TopLink',
-  
+
   data() {
     return {
       navbar: '',
-      topLink: ''
+      topLink: '',
     }
   },
 
@@ -20,19 +20,21 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
   },
 
-  unmounted () {
+  unmounted() {
     window.removeEventListener('scroll', this.handleScroll)
   },
-  
+
   methods: {
     handleScroll() {
       const scrollHeight = window.pageYOffset
-      const navHeight = document.getElementById('nav').getBoundingClientRect().height
+      const navHeight = document
+        .getElementById('nav')
+        .getBoundingClientRect().height
 
       if (scrollHeight > navHeight) {
         this.topLink = 'show-link'
         return
-      } 
+      }
       this.topLink = ''
     },
   },
@@ -45,13 +47,13 @@ export default {
   position: fixed;
   bottom: 3rem;
   right: 3rem;
-  background: var(--clr-secondary);
+  background: var(--davys-gray);
   width: 2rem;
   height: 2rem;
   display: grid;
   place-items: center;
   border-radius: var(--radius);
-  color: var(--clr-white);
+  color: var(--white-smoke);
   animation: bounce 2s ease-in-out infinite;
 
   visibility: hidden;

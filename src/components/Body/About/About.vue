@@ -146,14 +146,14 @@ export default {
   text-transform: none;
   font-size: 1rem;
   display: block;
-  background: var(--clr-grey-9);
+  background: var(--silver);
+  color: var(--clr-black);
   cursor: pointer;
   transition: var(--transition);
   letter-spacing: var(--spacing);
 }
 .tab-btn:hover:not(.active) {
-  background: var(--clr-primary-10);
-  color: var(--clr-primary-5);
+  background: var(--silver-2);
 }
 
 .tab-btn.active {

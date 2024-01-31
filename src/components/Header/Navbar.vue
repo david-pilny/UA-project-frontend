@@ -72,7 +72,7 @@ export default {
           label: this.$t('header.navbar.about'),
         },
         {
-          href: '#services',
+          href: '#format',
           label: this.$t('header.navbar.format'),
         },
         {
@@ -160,7 +160,7 @@ export default {
 <style scoped>
 /* navbar */
 nav {
-  background: var(--clr-white);
+  background: var(--white-smoke);
   padding: 1rem 1.5rem;
 }
 /* fixed nav */
@@ -169,22 +169,22 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--clr-white);
+  background: var(--white-smoke);
   box-shadow: var(--light-shadow);
   z-index: 1;
 }
 .fixed-nav .links a {
-  color: var(--clr-grey-1);
+  color: var(--jet);
 }
 .fixed-nav .links a:hover {
-  color: var(--clr-secondary);
+  color: var(--gray);
 }
 
 .fixed-nav .links select {
-  color: var(--clr-grey-1);
+  color: var(--gray);
 }
 .fixed-nav .links select:hover {
-  color: var(--clr-secondary);
+  color: var(--gray);
 }
 /* .fixed-nav .links-container {
   height: auto !important;
@@ -196,14 +196,14 @@ nav {
 }
 .nav-toggle {
   font-size: 1.5rem;
-  color: var(--clr-grey-1);
+  color: var(--jet);
   background: transparent;
   border-color: transparent;
   transition: var(--transition);
   cursor: pointer;
 }
 .nav-toggle:hover {
-  color: var(--clr-secondary);
+  color: var(--gray);
 }
 .logo {
   height: 50px;
@@ -217,7 +217,7 @@ nav {
   height: 200px;
 }
 .links a {
-  background: var(--clr-white);
+  background: var(--white-smoke);
   color: var(--clr-grey-5);
   font-size: 1.1rem;
   text-transform: none;
@@ -244,14 +244,14 @@ select {
   font-weight: bold;
   cursor: inherit;
   line-height: inherit;
-  color: var(--clr-grey-5);
+  color: var(--gray);
   letter-spacing: var(--spacing);
   transition: var(--transition);
 }
 
 select:hover {
   cursor: pointer;
-  color: var(--clr-grey-1);
+  color: var(--gray);
 }
 
 @media screen and (min-width: 800px) {
