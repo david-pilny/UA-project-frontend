@@ -1,6 +1,6 @@
 <template>
   <!-- tours -->
-  <section id="tours" class="section">
+  <section id="form" class="section">
     <div class="title">
       <h2>sdílejte svůj příběh</h2>
     </div>

@@ -1,13 +1,13 @@
 <template>
-  <About />
-  <Format />
-  <Form />
+  <div>
+    <About />
+    <Format />
+  </div>
 </template>
 
 <script>
 import About from '@/components/Body/About/About.vue'
 import Format from '@/components/Body/Format/Format.vue'
-import Form from '@/components/Body/Form/Form.vue'
 
 export default {
   name: 'Body',
@@ -15,7 +15,6 @@ export default {
   components: {
     About,
     Format,
-    Form,
   },
 }
 </script>

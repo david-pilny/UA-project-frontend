@@ -1,30 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import HomeView from '../views/HomeView.vue'
-import AdminView from '../views/AdminView.vue'
-import i18n from '../i18n'
+import FormView from '../views/FormView.vue'
 
 const routes = [
   {
-    path: '/',
-    redirect: `/${i18n.locale}`,
+    path: '',
+    redirect: 'home',
   },
   {
-    path: '/:lang',
-    component: {
-      template: `<router-view></router-view>`,
-    },
-    children: [
-      {
-        path: '',
-        name: 'home',
-        component: HomeView,
-      },
-    ],
+    name: 'home',
+    path: '/:section',
+    component: HomeView,
   },
   {
-    path: '/admin',
-    name: 'admin',
-    component: AdminView,
+    name: 'form',
+    path: '/form',
+    component: FormView,
   },
 ]
 
