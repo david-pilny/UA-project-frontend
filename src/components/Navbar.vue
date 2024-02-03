@@ -1,6 +1,6 @@
 <template>
   <!-- navbar -->
-  <nav id="nav" ref="nav" :class="fixedNav">
+  <nav id="nav" ref="nav" class="fixed-nav">
     <div class="nav-center">
       <!-- nav header -->
       <div class="nav-header">
@@ -36,7 +36,7 @@
             <select
               name="language"
               id="language"
-              v-on:change="changeLang($event)"
+              v-on:change="changeRoute($event)"
             >
               <option ref="langPlaceholder" selected disabled hidden>
                 {{ $t('langSwitcher') }}
@@ -53,8 +53,6 @@
 </template>
 
 <script>
-import { changeLocale } from '@core/services'
-
 export default {
   name: 'Navbar',
 
@@ -104,9 +102,8 @@ export default {
       return this.$refs.nav.getBoundingClientRect().height
     },
 
-    changeLang(event) {
-      changeLocale(event.target.value)
-      // this.$router.push('/' + event.target.value)
+    changeRoute(event) {
+      this.$router.push('/' + event.target.value)
       this.langPlaceholder.selected = true
     },
 
@@ -121,15 +118,18 @@ export default {
     },
 
     handleLinkClick(event) {
+      // prevent default
       event.preventDefault()
+
+      // navigate to a specific section
       const id = event.currentTarget.getAttribute('href').slice(1)
 
       if (id === 'form') {
-        this.$router.push({ path: '/form' })
+        this.$router.push({name:'form'})
         return
       }
 
-      this.scrollToSection(id)
+      this.$router.push({path: `/${id}`})
     },
 
     navToggle() {
@@ -139,28 +139,9 @@ export default {
         this.linksContainerStyle.height = '0'
       }
     },
-
-    scrollToSection(sectionId) {
-      const element = document.getElementById(sectionId)
-      let position = element.offsetTop - this.navbarHeight()
-
-      if (!this.fixedNav) {
-        position -= this.navbarHeight()
-      }
-
-      if (this.navbarHeight() > 82) {
-        position += this.containerHeight()
-      }
-      window.scrollTo({
-        left: 0,
-        top: position,
-      })
-      this.linksContainerStyle.height = '0'
-    },
   },
 
   mounted() {
-    this.scrollToSection(this.$route.params.section)
     this.langPlaceholder = this.$refs.langPlaceholder
   },
 
