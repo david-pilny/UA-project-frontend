@@ -78,7 +78,7 @@ export default {
         vision: 'body.about.buttons.inspiration',
         goals: 'body.about.buttons.goals',
       },
-      bannerImg: require('@/media/about-banner.png'),
+      bannerImg: new URL('@/media/about-banner.png', import.meta.url).href,
     }
   },
 

@@ -1,32 +1,32 @@
 {
   "name": "client",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:e2e": "vue-cli-service test:e2e",
-    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.1.2",
-    "core-js": "^3.8.3",
+    "@mdi/font": "^7.2.96",
+    "axios": "^1.6.7",
+    "firebase": "^9.23.0",
+    "vue": "^3.2.47",
+    "vue-filepond": "^7.0.4",
+    "vue-i18n": "^9.9.1",
+    "vue-router": "^4.1.6",
+    "vuefire": "^3.1.0",
+    "vuetify": "^3.2.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
     "filepond": "^4.30.4",
     "filepond-plugin-file-encode": "^2.1.10",
     "filepond-plugin-file-validate-type": "^1.2.8",
     "filepond-plugin-image-preview": "^4.6.11",
-    "vue": "^3.2.13",
-    "vue-filepond": "^7.0.3",
-    "vue-i18n": "^9.1.0",
-    "vue-router": "^4.0.3"
-  },
-  "devDependencies": {
-    "@intlify/vue-i18n-loader": "^3.0.0",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-e2e-cypress": "~5.0.0",
-    "@vue/cli-plugin-router": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "cypress": "^9.7.0",
-    "vue-cli-plugin-i18n": "^2.3.1"
+    "typescript": "^5.0.2",
+    "vite": "^4.3.2",
+    "vue-tsc": "^1.4.2"
   }
 }
