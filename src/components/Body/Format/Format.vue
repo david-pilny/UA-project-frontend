@@ -28,8 +28,8 @@ export default {
   components: { Carousel },
   data: () => ({
     slides: [
-      require('@/media/Nikopol_Chat.png'),
-      require('@/media/model_pic_page_1.jpg'),
+      new URL('@/media/Nikopol_Chat.png', import.meta.url).href,
+      new URL('@/media/model_pic_page_1.jpg', import.meta.url).href,
     ],
   }),
 }

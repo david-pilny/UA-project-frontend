@@ -125,11 +125,11 @@ export default {
       const id = event.currentTarget.getAttribute('href').slice(1)
 
       if (id === 'form') {
-        this.$router.push({name:'form'})
+        this.$router.push({ name: 'form' })
         return
       }
 
-      this.$router.push({path: `/${id}`})
+      this.$router.push({ path: `/${id}` })
     },
 
     navToggle() {
@@ -159,7 +159,7 @@ nav {
 }
 /* fixed nav */
 .fixed-nav {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
