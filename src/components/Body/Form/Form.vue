@@ -14,7 +14,7 @@
             type="email"
             id="email"
             name="email"
-            v-model="email"
+            v-model="formData.email"
             class="form-input"
           />
         </div>
@@ -27,12 +27,12 @@
           >
           <!-- <input type="text" id="price" class="form-input" > -->
           <textarea
-            name="desc"
+            name="description"
             class="form-input"
-            id="desc"
+            id="description"
             cols="20"
             rows="10"
-            v-model="desc"
+            v-model="formData.description"
           ></textarea>
         </div>
         <!-- end of single row -->
@@ -56,7 +56,12 @@
 
         <!-- single row -->
         <div class="form-row">
-          <input type="checkbox" id="agree" name="agree" v-model="checked" />
+          <input
+            type="checkbox"
+            id="agree"
+            name="agree"
+            v-model="formData.checked"
+          />
           <label for="agree">
             Souhlasím s použitím sdílených informací v knize</label
           >
@@ -82,20 +87,26 @@
 </template>
 
 <script>
-import ApiService from '@/ApiService'
-import Modal from '@/components/Body/Form/Modal.vue'
-import DefaultModalContent from '@/components/Body/Form/DefaultModalContent.vue'
-import ModalSuccess from '@/components/Body/Form/ModalSuccess.vue'
-import ModalBadTypeFile from '@/components/Body/Form/ModalBadTypeFile.vue'
-import { ref } from 'vue'
-
-import vueFilePond from 'vue-filepond'
 import 'filepond/dist/filepond.min.css'
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css'
 
+import { ref } from 'vue'
+import { useFirestore, useCollection } from 'vuefire'
+import { collection, addDoc } from 'firebase/firestore'
+import {
+  getStorage,
+  ref as fireRef,
+  uploadBytes,
+  uploadString,
+} from 'firebase/storage'
+import vueFilePond from 'vue-filepond'
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
+
+import { prepareFiles } from './services'
+
+const db = useFirestore()
 
 // Create component
 const FilePond = vueFilePond(
@@ -105,20 +116,17 @@ const FilePond = vueFilePond(
 )
 
 export default {
-  name: 'Form',
   components: {
-    Modal,
-    DefaultModalContent,
     FilePond,
-    ModalSuccess,
-    ModalBadTypeFile,
   },
-  
+
   data() {
     return {
-      email: '',
-      desc: '',
-      checked: false,
+      formData: {
+        email: '',
+        description: '',
+        checked: false,
+      },
       loading: false,
       success: false,
       badFileType: false,
@@ -133,8 +141,6 @@ export default {
     }
     return { modalActive, toggleModal }
   },
-
-  mounted() {},
 
   methods: {
     handleFilePondInit: function () {
@@ -167,36 +173,72 @@ export default {
     async submitForm(e) {
       e.preventDefault()
 
-      // open modal and turn on the loading circle
-      this.toggleModal()
-      this.startLoading()
+      const storage = getStorage()
+      const storageRef = fireRef(storage, 'baseimg')
 
-      let picArr = []
-
-      this.$refs.pond.getFiles().forEach((file) => {
-        let fileEncoded = file.getFileEncodeBase64String()
-
-        if (fileEncoded) {
-          picArr.push(fileEncoded)
-        } else {
-          this.badFileType = true
-        }
+      uploadString(
+        storageRef,
+        prepareFiles(this.$refs.pond.getFiles())[0].image,
+        'base64'
+      ).then((snapshot) => {
+        console.log('Uploaded a base64 string!')
       })
 
-      if (!this.badFileType) {
-        const result = await ApiService.postStory(
-          this.email,
-          this.desc.trim(),
-          picArr,
-          this.checked
-        )
-        if (result.status === 201) {
-          this.showSuccess()
-          this.clearForm()
-        }
-      } else {
-        this.badTypeError()
-      }
+      // // Create file metadata including the content type
+      // /** @type {any} */
+      // const metadata = {
+      //   contentType: 'image/jpeg',
+      // }
+
+      // // Upload the file and metadata
+      // const uploadTask = uploadString(
+      //   storageRef,
+      //   this.$refs.pond.getFiles()[0],
+      //   metadata
+      // )
+
+      // this.$refs.pond.getFiles().forEach((file) => {
+      //   uploadBytes(storageRef, file).then((snapshot) => {
+      //     console.log('Uploaded a blob or file!')
+      //   })
+      // })
+      // 'file' comes from the Blob or File API
+
+      // const newDoc = await addDoc(collection(db, 'stories'), {
+      //   email: this.email,
+      //   description: this.desc,
+      //   checked: this.checked,
+      //   pics: prepareFiles(this.$refs.pond.getFiles()),
+      // })
+
+      // console.log(newDoc)
+
+      // let picArr = []
+
+      // this.$refs.pond.getFiles().forEach((file) => {
+      //   let fileEncoded = file.getFileEncodeBase64String()
+
+      //   if (fileEncoded) {
+      //     picArr.push(fileEncoded)
+      //   } else {
+      //     this.badFileType = true
+      //   }
+      // })
+
+      // if (!this.badFileType) {
+      //   const result = await ApiService.postStory(
+      //     this.email,
+      //     this.desc.trim(),
+      //     picArr,
+      //     this.checked
+      //   )
+      //   if (result.status === 201) {
+      //     this.showSuccess()
+      //     this.clearForm()
+      //   }
+      // } else {
+      //   this.badTypeError()
+      // }
     },
   },
 }

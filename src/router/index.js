@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '../views/HomeView.vue'
-import FormView from '../views/FormView.vue'
 
 const routes = [
   {
@@ -16,7 +15,7 @@ const routes = [
   {
     name: 'form',
     path: '/form',
-    component: FormView,
+    component: () => import('../views/FormView.vue'),
   },
 ]
 
