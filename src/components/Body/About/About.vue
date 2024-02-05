@@ -1,3 +1,32 @@
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+import { ActiveClassesInterface, TabsInterface, ValidTabKeys } from './models'
+
+const bannerImg = ref(new URL('@/media/about-banner.png', import.meta.url).href)
+
+const activeClasses = ref<ActiveClassesInterface>({
+  history: 'active',
+  vision: '',
+  goals: '',
+})
+
+const categories = ref<ValidTabKeys[]>(['history', 'vision', 'goals'])
+
+const translations = ref<TabsInterface>({
+  history: 'body.about.buttons.idea',
+  vision: 'body.about.buttons.inspiration',
+  goals: 'body.about.buttons.goals',
+})
+
+const displayCategory = (category: ValidTabKeys) => {
+  categories.value.forEach((classKey: ValidTabKeys) => {
+    activeClasses.value[classKey] = classKey === category ? 'active' : ''
+  })
+}
+</script>
+¨
+
 <template>
   <!-- about -->
   <section id="about" class="section">
@@ -60,42 +89,6 @@
     </div>
   </section>
 </template>
-
-<script>
-export default {
-  name: 'About',
-
-  data() {
-    return {
-      categories: ['history', 'vision', 'goals'],
-      activeClasses: {
-        history: '',
-        vision: '',
-        goals: '',
-      },
-      translations: {
-        history: 'body.about.buttons.idea',
-        vision: 'body.about.buttons.inspiration',
-        goals: 'body.about.buttons.goals',
-      },
-      bannerImg: new URL('@/media/about-banner.png', import.meta.url).href,
-    }
-  },
-
-  created() {
-    this.displayCategory('history')
-  },
-
-  methods: {
-    displayCategory(category) {
-      this.categories.forEach((classKey) => {
-        this.activeClasses[classKey] = ''
-        if (classKey === category) this.activeClasses[classKey] += 'active'
-      })
-    },
-  },
-}
-</script>
 
 <style scoped>
 .about-content {
