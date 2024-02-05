@@ -1,3 +1,72 @@
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+import CarouselItem from './CarouselItem.vue'
+import CarouselControls from './CarouselControls.vue'
+import CarouselIndicators from './CarouselIndicators.vue'
+
+const props = defineProps({
+  slides: {
+    type: Array,
+    required: true,
+  },
+  controls: {
+    type: Boolean,
+    default: false,
+  },
+  indicators: {
+    type: Boolean,
+    default: false,
+  },
+  interval: {
+    type: Number,
+    default: 86400000,
+  },
+})
+
+const currentSlide = ref<number>(0)
+const slideInterval = ref()
+const direction = ref('right')
+
+const setCurrentSlide = (index: number) => {
+  currentSlide.value = index
+}
+const prev = (step = -1) => {
+  const index =
+    currentSlide.value > 0 ? currentSlide.value + step : props.slides.length - 1
+  setCurrentSlide(index)
+  direction.value = 'left'
+  startSlideTimer()
+}
+const _next = (step = 1) => {
+  const index =
+    currentSlide.value < props.slides.length - 1 ? currentSlide.value + step : 0
+  setCurrentSlide(index)
+  direction.value = 'right'
+}
+const next = (step = 1) => {
+  _next(step)
+  startSlideTimer()
+}
+const startSlideTimer = () => {
+  stopSlideTimer()
+  slideInterval.value = setInterval(() => {
+    _next()
+  }, props.interval)
+}
+const stopSlideTimer = () => {
+  clearInterval(slideInterval.value)
+}
+const switchSlide = (index: number) => {
+  const step = index - currentSlide.value
+  if (step > 0) {
+    next(step)
+  } else {
+    prev(step)
+  }
+}
+</script>
+
 <template>
   <div class="carousel">
     <div class="carousel-inner">
@@ -25,88 +94,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import CarouselItem from './CarouselItem.vue'
-import CarouselControls from './CarouselControls.vue'
-import CarouselIndicators from './CarouselIndicators.vue'
-
-export default {
-  props: {
-    slides: {
-      type: Array,
-      required: true,
-    },
-    controls: {
-      type: Boolean,
-      default: false,
-    },
-    indicators: {
-      type: Boolean,
-      default: false,
-    },
-    interval: {
-      type: Number,
-      default: 86400000,
-    },
-  },
-  components: { CarouselItem, CarouselControls, CarouselIndicators },
-  data: () => ({
-    currentSlide: 0,
-    slideInterval: null,
-    direction: 'right',
-  }),
-  methods: {
-    setCurrentSlide(index) {
-      this.currentSlide = index
-    },
-    prev(step = -1) {
-      const index =
-        this.currentSlide > 0
-          ? this.currentSlide + step
-          : this.slides.length - 1
-      this.setCurrentSlide(index)
-      this.direction = 'left'
-      this.startSlideTimer()
-    },
-    _next(step = 1) {
-      const index =
-        this.currentSlide < this.slides.length - 1
-          ? this.currentSlide + step
-          : 0
-      this.setCurrentSlide(index)
-      this.direction = 'right'
-    },
-    next(step = 1) {
-      this._next(step)
-      this.startSlideTimer()
-    },
-    startSlideTimer() {
-      this.stopSlideTimer()
-      this.slideInterval = setInterval(() => {
-        this._next()
-      }, this.interval)
-    },
-    stopSlideTimer() {
-      clearInterval(this.slideInterval)
-    },
-    switchSlide(index) {
-      const step = index - this.currentSlide
-      if (step > 0) {
-        this.next(step)
-      } else {
-        this.prev(step)
-      }
-    },
-  },
-  mounted() {
-    this.startSlideTimer()
-  },
-  beforeUnmount() {
-    this.stopSlideTimer()
-  },
-}
-</script>
 
 <style scoped>
 .carousel {

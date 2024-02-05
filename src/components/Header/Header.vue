@@ -1,3 +1,8 @@
+<script setup>
+import Navbar from './Navbar.vue'
+import Banner from './Banner.vue'
+</script>
+
 <template>
   <!-- header -->
   <header id="home">
@@ -5,20 +10,6 @@
     <Banner />
   </header>
 </template>
-
-<script>
-import Navbar from '@/components/Header/Navbar.vue'
-import Banner from '@/components/Header/Banner.vue'
-
-export default {
-  name: 'Header',
-
-  components: {
-    Navbar,
-    Banner,
-  },
-}
-</script>
 
 <style scoped>
 header {

@@ -13,12 +13,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Banner',
-}
-</script>
-
 <style scoped>
 .banner {
   min-height: 100vh;

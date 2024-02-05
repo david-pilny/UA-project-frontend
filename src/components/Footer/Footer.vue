@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const date = ref<number>(new Date().getFullYear())
+</script>
+
 <template>
   <!-- footer -->
   <footer class="section">
@@ -7,22 +13,6 @@
     </p>
   </footer>
 </template>
-
-<script>
-export default {
-  name: 'Footer',
-
-  data() {
-    return {
-      date: '',
-    }
-  },
-
-  mounted() {
-    this.date = new Date().getFullYear()
-  },
-}
-</script>
 
 <style scoped>
 footer {

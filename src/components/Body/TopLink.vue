@@ -1,45 +1,34 @@
+<script lang="ts" setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import { debounce } from 'lodash-es'
+
+type LinkStatus = 'show-link' | ''
+
+const topLink = ref<LinkStatus>('')
+
+const handleScroll = debounce(() => {
+  const scrollHeight = window.pageYOffset
+  const navElement = document.getElementById('nav')
+  const navHeight = navElement?.getBoundingClientRect().height || 0
+
+  topLink.value = scrollHeight > navHeight ? 'show-link' : ''
+}, 100)
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+</script>
+
 <template>
   <!-- back to top button -->
   <a href="#home" :class="`scroll-link top-link ${topLink}`">
     <i class="fas fa-arrow-up"></i>
   </a>
 </template>
-
-<script>
-export default {
-  name: 'TopLink',
-
-  data() {
-    return {
-      navbar: '',
-      topLink: '',
-    }
-  },
-
-  created() {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-
-  unmounted() {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
-
-  methods: {
-    handleScroll() {
-      const scrollHeight = window.pageYOffset
-      const navHeight = document
-        .getElementById('nav')
-        .getBoundingClientRect().height
-
-      if (scrollHeight > navHeight) {
-        this.topLink = 'show-link'
-        return
-      }
-      this.topLink = ''
-    },
-  },
-}
-</script>
 
 <style scoped>
 .top-link {
@@ -55,8 +44,8 @@ export default {
   border-radius: var(--radius);
   color: var(--white-smoke);
   animation: bounce 2s ease-in-out infinite;
-
   visibility: hidden;
+  transition: visibility 0.3s ease;
   z-index: -100;
 }
 .show-link {

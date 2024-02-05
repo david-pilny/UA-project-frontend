@@ -1,3 +1,14 @@
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+import Carousel from './Carousel.vue'
+
+const slides = ref<string[]>([
+  new URL('@/media/Nikopol_Chat.png', import.meta.url).href,
+  new URL('@/media/model_pic_page_1.jpg', import.meta.url).href,
+])
+</script>
+
 <template>
   <!-- format -->
   <section id="format" class="section">
@@ -20,19 +31,3 @@
     <carousel :slides="slides" controls indicators></carousel>
   </section>
 </template>
-
-<script>
-import Carousel from '@/components/Body/Format/Carousel.vue'
-
-export default {
-  components: { Carousel },
-  data: () => ({
-    slides: [
-      new URL('@/media/Nikopol_Chat.png', import.meta.url).href,
-      new URL('@/media/model_pic_page_1.jpg', import.meta.url).href,
-    ],
-  }),
-}
-</script>
-
-<style scoped></style>

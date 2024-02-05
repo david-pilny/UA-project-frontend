@@ -8,10 +8,10 @@ import App from './App.vue'
 import router from './router'
 
 createApp(App)
-  // .use(VueFire, {
-  //   firebaseApp,
-  //   modules: [VueFireAuth()],
-  // })
+  .use(VueFire, {
+    firebaseApp,
+    modules: [VueFireAuth()],
+  })
   .use(i18n)
   .use(router)
   .mount('#app')
