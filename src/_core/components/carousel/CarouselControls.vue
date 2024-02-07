@@ -1,20 +1,18 @@
+<script setup>
+const emit = defineEmits(['prev', 'next'])
+</script>
+
 <template>
   <!-- in vue 2.x you need wrap these buttons in a div -->
   <div class="control-div">
-    <button class="carousel-control left" @click="$emit('prev')">
+    <button class="carousel-control left" @click="emit('prev')">
       <i class="fa fa-chevron-left" aria-hidden="true"></i>
     </button>
-    <button class="carousel-control right" @click="$emit('next')">
+    <button class="carousel-control right" @click="emit('next')">
       <i class="fa fa-chevron-right" aria-hidden="true"></i>
     </button>
   </div>
 </template>
-
-<script>
-export default {
-  emits: ['prev', 'next'], // vue v3
-}
-</script>
 
 <style scoped>
 .control-div {

@@ -1,21 +1,21 @@
+<script lang="ts" setup>
+import { IndicatorsProps } from './models'
+
+const emit = defineEmits(['switch'])
+const { total, currentIndex } = defineProps<IndicatorsProps>()
+</script>
+
 <template>
   <div class="carousel-indicators">
     <button
       class="carousel-indicator-item"
       :class="{ active: currentIndex === index }"
-      v-for="(item, index) in total"
+      v-for="(_, index) in total"
       :key="index"
-      @click="$emit('switch', index)"
+      @click="emit('switch', index)"
     ></button>
   </div>
 </template>
-
-<script>
-export default {
-  emits: ["switch"],
-  props: ["total", "currentIndex"],
-};
-</script>
 
 <style scoped>
 .carousel-indicators {
