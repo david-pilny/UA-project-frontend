@@ -13,7 +13,7 @@
     "axios": "^1.6.7",
     "firebase": "^9.23.0",
     "lodash-es": "^4.17.21",
-    "vue": "^3.2.47",
+    "vue": "^3.4.15",
     "vue-filepond": "^7.0.4",
     "vue-i18n": "^9.9.1",
     "vue-router": "^4.1.6",
@@ -27,6 +27,7 @@
     "filepond-plugin-file-encode": "^2.1.10",
     "filepond-plugin-file-validate-type": "^1.2.8",
     "filepond-plugin-image-preview": "^4.6.11",
+    "prettier": "^3.1.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
     "vue-tsc": "^1.4.2"

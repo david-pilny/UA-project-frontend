@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import Carousel from './Carousel.vue'
+import Carousel from '@core/components/carousel/index.vue'
 
 const slides = ref<string[]>([
   new URL('@/media/Nikopol_Chat.png', import.meta.url).href,
@@ -18,13 +18,13 @@ const slides = ref<string[]>([
 
     <div class="note note-primary">
       <p>
-        {{ $t('body.format.description.firstParagraph') }}
+        {{ $t('body.format.description.paragraphs.first') }}
       </p>
       <p>
-        {{ $t('body.format.description.secondParagraph') }}
+        {{ $t('body.format.description.paragraphs.second') }}
       </p>
       <p>
-        {{ $t('body.format.description.thirdParagraph') }}
+        {{ $t('body.format.description.paragraphs.first') }}
       </p>
     </div>
 

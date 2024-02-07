@@ -39,9 +39,11 @@
     "format": {
       "title": "formát knihy",
       "description": {
-        "firstParagraph": "Formát knihy bych si představoval tak, aby stránky vypadaly jako okénka chatu, podobně jako například v aplikacích Messenger nebo Telegram. Myslím si, že se čtenáři dokáži lépe vcítit do válkou postižených lidí, pokud sdílené zprávy vidí ve formátu, se kterým přichází do styku každý den. Mimo jiné to podle mě nejvíce zachovává autentičnost takových zpráv.",
-        "secondParagraph": "Ačkoli tyto zprávy budou hlavním předmětem knihy, nechtěl bych se striktně soustředit pouze na ně. Neváhám do knihy zasadit ani různé fotky, pokud autor bude souhlasit s jejich publikováním. Zároveň bych chtěl stránky sem tam prokládat obrázky vygenerovanými neurnovou sítí podle textu z některých sdílených zpráv.",
-        "thirdParagraph": "Na příklad několika stránek knihy se můžete podívat zde:"
+        "paragraphs": {
+          "first": "Formát knihy bych si představoval tak, aby stránky vypadaly jako okénka chatu, podobně jako například v aplikacích Messenger nebo Telegram. Myslím si, že se čtenáři dokáži lépe vcítit do válkou postižených lidí, pokud sdílené zprávy vidí ve formátu, se kterým přichází do styku každý den. Mimo jiné to podle mě nejvíce zachovává autentičnost takových zpráv.",
+          "second": "Ačkoli tyto zprávy budou hlavním předmětem knihy, nechtěl bych se striktně soustředit pouze na ně. Neváhám do knihy zasadit ani různé fotky, pokud autor bude souhlasit s jejich publikováním. Zároveň bych chtěl stránky sem tam prokládat obrázky vygenerovanými neurnovou sítí podle textu z některých sdílených zpráv.",
+          "third": "Na příklad několika stránek knihy se můžete podívat zde:"
+        }
       }
     },
     "form": {}

@@ -1,69 +1,63 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import { CarouselProps, DirectionTypes } from './models'
+
 import CarouselItem from './CarouselItem.vue'
 import CarouselControls from './CarouselControls.vue'
 import CarouselIndicators from './CarouselIndicators.vue'
 
-const props = defineProps({
-  slides: {
-    type: Array,
-    required: true,
-  },
-  controls: {
-    type: Boolean,
-    default: false,
-  },
-  indicators: {
-    type: Boolean,
-    default: false,
-  },
-  interval: {
-    type: Number,
-    default: 86400000,
-  },
-})
+const { controls, indicators, interval, slides } = withDefaults(
+  defineProps<CarouselProps>(),
+  {
+    controls: false,
+    indicators: false,
+    interval: 86400000,
+  }
+)
 
 const currentSlide = ref<number>(0)
 const slideInterval = ref()
-const direction = ref('right')
+const direction = ref<DirectionTypes>('right')
 
 const setCurrentSlide = (index: number) => {
   currentSlide.value = index
 }
-const prev = (step = -1) => {
+
+const _next = (step = 1) => {
   const index =
-    currentSlide.value > 0 ? currentSlide.value + step : props.slides.length - 1
+    currentSlide.value < slides.length - 1 ? currentSlide.value + step : 0
+  setCurrentSlide(index)
+  direction.value = 'right'
+}
+
+const previousSlide = (step = -1) => {
+  const index =
+    currentSlide.value > 0 ? currentSlide.value + step : slides.length - 1
   setCurrentSlide(index)
   direction.value = 'left'
   startSlideTimer()
 }
-const _next = (step = 1) => {
-  const index =
-    currentSlide.value < props.slides.length - 1 ? currentSlide.value + step : 0
-  setCurrentSlide(index)
-  direction.value = 'right'
-}
-const next = (step = 1) => {
+
+const nextSlide = (step = 1) => {
   _next(step)
   startSlideTimer()
 }
+
 const startSlideTimer = () => {
   stopSlideTimer()
   slideInterval.value = setInterval(() => {
     _next()
-  }, props.interval)
+  }, interval)
 }
+
 const stopSlideTimer = () => {
   clearInterval(slideInterval.value)
 }
+
 const switchSlide = (index: number) => {
   const step = index - currentSlide.value
-  if (step > 0) {
-    next(step)
-  } else {
-    prev(step)
-  }
+  step > 0 ? nextSlide(step) : previousSlide(step)
 }
 </script>
 
@@ -76,6 +70,7 @@ const switchSlide = (index: number) => {
         :current-index="currentSlide"
         @switch="switchSlide($event)"
       ></carousel-indicators>
+
       <carousel-item
         v-for="(slide, index) in slides"
         :slide="slide"
@@ -86,10 +81,11 @@ const switchSlide = (index: number) => {
         @mouseenter="stopSlideTimer"
         @mouseout="startSlideTimer"
       ></carousel-item>
+
       <carousel-controls
         v-if="controls"
-        @prev="prev"
-        @next="next"
+        @prev="previousSlide"
+        @next="nextSlide"
       ></carousel-controls>
     </div>
   </div>
