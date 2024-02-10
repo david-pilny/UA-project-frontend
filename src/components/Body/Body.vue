@@ -1,6 +1,6 @@
 <script setup>
-import About from '@/components/Body/About/About.vue'
-import Format from '@/components/Body/Format/Format.vue'
+import About from './About/index.vue'
+import Format from './Format/index.vue'
 </script>
 
 <template>

@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+import CarouselItem from './components/CarouselItem.vue'
+import CarouselControls from './components/CarouselControls.vue'
+import CarouselIndicators from './components/CarouselIndicators.vue'
 import { CarouselProps, DirectionTypes } from './models'
-
-import CarouselItem from './CarouselItem.vue'
-import CarouselControls from './CarouselControls.vue'
-import CarouselIndicators from './CarouselIndicators.vue'
 
 const { controls, indicators, interval, slides } = withDefaults(
   defineProps<CarouselProps>(),

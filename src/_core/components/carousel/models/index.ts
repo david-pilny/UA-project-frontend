@@ -1,5 +1,5 @@
 export interface CarouselProps {
-  slides: any
+  slides: string[]
   controls?: boolean
   indicators?: boolean
   interval?: number

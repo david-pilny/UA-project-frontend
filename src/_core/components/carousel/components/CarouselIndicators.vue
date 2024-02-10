@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { IndicatorsProps } from './models'
+import { IndicatorsProps } from '../models'
 
 const emit = defineEmits(['switch'])
 const { total, currentIndex } = defineProps<IndicatorsProps>()

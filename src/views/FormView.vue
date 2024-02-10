@@ -1,11 +1,7 @@
 <script setup>
-// import Body from '@/components/Body/Body.vue'
 import Form from '@/components/Body/Form/Form.vue'
-import Footer from '@/components/Footer/Footer.vue'
-import Navbar from '@/components/Navbar.vue'
-// import Header from '@/components/Header/Header.vue'
-// import Preloader from '@/components/Preloader.vue'
-// import TopLink from '@/components/Body/TopLink.vue'
+import Footer from '@core/components/footer/index.vue'
+import Navbar from '@core/components/navbar/index.vue'
 </script>
 
 <template>

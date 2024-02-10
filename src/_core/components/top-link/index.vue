@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue'
 import { debounce } from 'lodash-es'
+import { ref, onMounted, onUnmounted } from 'vue'
 
-type LinkStatus = 'show-link' | ''
-
-const topLink = ref<LinkStatus>('')
+const topLink = ref<'show-link' | ''>('')
 
 const handleScroll = debounce(() => {
   const scrollHeight = window.pageYOffset
@@ -13,6 +11,13 @@ const handleScroll = debounce(() => {
 
   topLink.value = scrollHeight > navHeight ? 'show-link' : ''
 }, 100)
+
+const handleClick = () => {
+  window.scrollTo({
+    left: 0,
+    top: 0,
+  })
+}
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
@@ -25,9 +30,9 @@ onUnmounted(() => {
 
 <template>
   <!-- back to top button -->
-  <a href="#home" :class="`scroll-link top-link ${topLink}`">
+  <div :class="`scroll-link top-link ${topLink}`" @click="handleClick">
     <i class="fas fa-arrow-up"></i>
-  </a>
+  </div>
 </template>
 
 <style scoped>
@@ -47,6 +52,9 @@ onUnmounted(() => {
   visibility: hidden;
   transition: visibility 0.3s ease;
   z-index: -100;
+}
+.top-link:hover {
+  cursor: pointer;
 }
 .show-link {
   visibility: visible;

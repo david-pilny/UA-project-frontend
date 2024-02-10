@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
-import { CarouselItemProps, TransitionEffect } from './models'
+import { CarouselItemProps, TransitionEffect } from '../models'
 
 const emit = defineEmits(['mouseenter', 'mouseout'])
 const props = defineProps<CarouselItemProps>()

@@ -1,6 +1,139 @@
+<script lang="ts" setup>
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
+
+const { t, locale } = useI18n({ useScope: 'global' })
+const route = useRoute()
+const router = useRouter()
+
+const props = withDefaults(defineProps<{ home?: boolean }>(), { home: false })
+
+const langPlaceholder = ref<HTMLOptionElement | null>(null)
+const links = ref<HTMLElement | null>(null)
+const linksContainer = ref<HTMLElement | null>(null)
+const navbar = ref<HTMLElement | null>(null)
+
+const fixedNav = ref<'fixed-nav' | ''>('')
+const linksContainerStyle = ref({ height: '0' })
+
+const navbarLinks = computed(() => {
+  return [
+    {
+      href: '#home',
+      label: t('header.navbar.home'),
+    },
+    {
+      href: '#about',
+      label: t('header.navbar.about'),
+    },
+    {
+      href: '#format',
+      label: t('header.navbar.format'),
+    },
+  ]
+})
+
+const containerHeight = () => {
+  return linksContainer.value?.getBoundingClientRect().height || 0
+}
+
+const linksHeight = () => {
+  return links.value?.getBoundingClientRect().height || 0
+}
+
+const navbarHeight = () => {
+  return navbar.value?.getBoundingClientRect().height || 0
+}
+
+const changeLang = (event: Event) => {
+  locale.value = (event.target as HTMLSelectElement).value
+  if (langPlaceholder.value) langPlaceholder.value.selected = true
+}
+
+const handleScroll = () => {
+  const scrollHeight = window.pageYOffset
+
+  if (scrollHeight > navbarHeight()) {
+    fixedNav.value = 'fixed-nav'
+    return
+  }
+  fixedNav.value = ''
+}
+
+const handleLinkClick = (event: MouseEvent) => {
+  event.preventDefault()
+
+  const hrefAttribute = (event.currentTarget as HTMLAnchorElement).getAttribute(
+    'href'
+  )
+
+  if (hrefAttribute === null || hrefAttribute === undefined) {
+    return
+  }
+
+  const id = hrefAttribute.slice(1)
+
+  if (id === 'form') {
+    router.push({ path: '/form' })
+    return
+  }
+
+  if (props.home) {
+    scrollToSection(id)
+  } else {
+    router.push({ path: `/${id}` })
+  }
+}
+
+const navToggle = () => {
+  if (containerHeight() === 0) {
+    linksContainerStyle.value.height = `${linksHeight()}px`
+  } else {
+    linksContainerStyle.value.height = '0'
+  }
+}
+
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId)
+  const offset = element?.offsetTop || 0
+  let position = offset - navbarHeight()
+
+  if (!fixedNav.value) {
+    position -= navbarHeight()
+  }
+
+  if (navbarHeight() > 82) {
+    position += containerHeight()
+  }
+  window.scrollTo({
+    left: 0,
+    top: position,
+  })
+  linksContainerStyle.value.height = '0'
+}
+
+onMounted(() => {
+  if (props.home) {
+    window.addEventListener('scroll', handleScroll)
+  } else {
+    fixedNav.value = 'fixed-nav'
+  }
+  const section = route.params.section
+
+  // Check if section is an array and use the first element
+  const id = Array.isArray(section) ? section[0] : section
+  scrollToSection(id)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+</script>
+
 <template>
   <!-- navbar -->
-  <nav id="nav" ref="nav" class="fixed-nav">
+  <nav id="nav" ref="navbar" :class="fixedNav">
     <div class="nav-center">
       <!-- nav header -->
       <div class="nav-header">
@@ -33,11 +166,7 @@
           </li>
 
           <li>
-            <select
-              name="language"
-              id="language"
-              v-on:change="changeRoute($event)"
-            >
+            <select name="language" id="language" v-on:change="changeLang">
               <option ref="langPlaceholder" selected disabled hidden>
                 {{ $t('langSwitcher') }}
               </option>
@@ -52,105 +181,6 @@
   </nav>
 </template>
 
-<script>
-export default {
-  name: 'Navbar',
-
-  data() {
-    return {
-      fixedNav: '',
-      langPlaceholder: '',
-      linksContainerStyle: {
-        height: '0',
-      },
-    }
-  },
-
-  computed: {
-    navbarLinks() {
-      return [
-        {
-          href: '#home',
-          label: this.$t('header.navbar.home'),
-        },
-        {
-          href: '#about',
-          label: this.$t('header.navbar.about'),
-        },
-        {
-          href: '#format',
-          label: this.$t('header.navbar.format'),
-        },
-      ]
-    },
-  },
-
-  created() {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-
-  methods: {
-    containerHeight() {
-      return this.$refs.linksContainer.getBoundingClientRect().height
-    },
-
-    linksHeight() {
-      return this.$refs.links.getBoundingClientRect().height
-    },
-
-    navbarHeight() {
-      return this.$refs.nav.getBoundingClientRect().height
-    },
-
-    changeRoute(event) {
-      this.$router.push('/' + event.target.value)
-      this.langPlaceholder.selected = true
-    },
-
-    handleScroll() {
-      const scrollHeight = window.pageYOffset
-
-      if (scrollHeight > this.navbarHeight()) {
-        this.fixedNav = 'fixed-nav'
-        return
-      }
-      this.fixedNav = ''
-    },
-
-    handleLinkClick(event) {
-      // prevent default
-      event.preventDefault()
-
-      // navigate to a specific section
-      const id = event.currentTarget.getAttribute('href').slice(1)
-
-      if (id === 'form') {
-        this.$router.push({ name: 'form' })
-        return
-      }
-
-      this.$router.push({ path: `/${id}` })
-    },
-
-    navToggle() {
-      if (this.containerHeight() === 0) {
-        this.linksContainerStyle.height = `${this.linksHeight()}px`
-      } else {
-        this.linksContainerStyle.height = '0'
-      }
-    },
-  },
-
-  mounted() {
-    this.langPlaceholder = this.$refs.langPlaceholder
-  },
-
-  unmounted() {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
-}
-</script>
-
 <style scoped>
 /* navbar */
 nav {
@@ -159,7 +189,7 @@ nav {
 }
 /* fixed nav */
 .fixed-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
