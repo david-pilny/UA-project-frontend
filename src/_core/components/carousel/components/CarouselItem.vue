@@ -19,7 +19,7 @@ const transitionEffect = computed<TransitionEffect>(() => {
       @mouseenter="emit('mouseenter')"
       @mouseout="emit('mouseout')"
     >
-      <img :src="slide" />
+      <img v-lazy="slide" />
     </div>
   </transition>
 </template>
