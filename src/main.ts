@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { VueFire, VueFireAuth } from 'vuefire'
+import VueLazyload from 'vue-lazyload'
 
 import i18n from '@core/services/i18n'
 
@@ -12,6 +13,7 @@ createApp(App)
     firebaseApp,
     modules: [VueFireAuth()],
   })
+  .use(VueLazyload)
   .use(i18n)
   .use(router)
   .mount('#app')

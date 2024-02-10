@@ -35,7 +35,7 @@ const displayCategory = (category: ValidTabKeys) => {
     </div>
 
     <div class="about-center section-center">
-      <img :src="bannerImg" alt="" />
+      <img v-lazy="bannerImg" alt="" />
 
       <article class="about">
         <!-- btn container -->

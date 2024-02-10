@@ -18,6 +18,7 @@
     "vue": "^3.4.15",
     "vue-filepond": "^7.0.4",
     "vue-i18n": "^9.9.1",
+    "vue-lazyload": "^3.0.0",
     "vue-router": "^4.1.6",
     "vuefire": "^3.1.0",
     "vuetify": "^3.2.1"
