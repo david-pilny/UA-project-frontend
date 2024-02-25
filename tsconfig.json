@@ -23,6 +23,7 @@
 
     "paths": {
       "@core/*": ["./src/_core/*"],
+      "@stores/*": ["./src/_core/stores/*"],
       "@/*": ["./src/*"]
     }
   },
