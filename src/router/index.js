@@ -12,11 +12,6 @@ const routes = [
     path: '/:section',
     component: HomeView,
   },
-  {
-    name: 'form',
-    path: '/form',
-    component: () => import('../views/FormView.vue'),
-  },
 ]
 
 const router = createRouter({
