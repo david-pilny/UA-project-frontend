@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 const { t, locale } = useI18n({ useScope: 'global' })
 const route = useRoute()
-const router = useRouter()
 
 const props = withDefaults(defineProps<{ home?: boolean }>(), { home: false })
 
@@ -74,16 +73,7 @@ const handleLinkClick = (event: MouseEvent) => {
 
   const id = hrefAttribute.slice(1)
 
-  if (id === 'form') {
-    router.push({ path: '/form' })
-    return
-  }
-
-  if (props.home) {
-    scrollToSection(id)
-  } else {
-    router.push({ path: `/${id}` })
-  }
+  scrollToSection(id)
 }
 
 const navToggle = () => {
@@ -156,12 +146,6 @@ onUnmounted(() => {
           <li v-for="link in navbarLinks" :key="link.href">
             <a :href="link.href" class="scroll-link" @click="handleLinkClick">{{
               link.label
-            }}</a>
-          </li>
-
-          <li>
-            <a href="#form" class="scroll-link" @click="handleLinkClick">{{
-              $t('header.navbar.form')
             }}</a>
           </li>
 

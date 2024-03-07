@@ -1,9 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /*
 =============== 
 Fonts
 ===============
 */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap'); */
 
 /*
 =============== 
@@ -89,6 +93,9 @@ body {
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
+}
+body.modal-open {
+  overflow: hidden;
 }
 ul {
   list-style-type: none;
@@ -237,7 +244,8 @@ main {
   height: auto;
 }
 
-#format {
+#format,
+#form {
   background: var(--silver-2);
 }
 
@@ -280,9 +288,9 @@ form css
  */
 
 .form {
-  width: 90vw;
+  width: 90%;
   max-width: var(--fixed-width);
-  background: var(--clr-white);
+  background: var(--white-smoke);
   border-radius: var(--radius);
   box-shadow: var(--light-shadow);
   padding: 2rem 2.5rem;
@@ -382,67 +390,4 @@ form css
 .note-primary {
   background-color: var(--white-smoke);
   /* border-color: var(--clr-primary-4); */
-}
-
-/* 
-==============
-MD Bootstrap
-==============
- */
-.loading-gif {
-  width: 200px;
-  height: 200px;
-}
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(73, 166, 233, 0.1);
-  display: grid;
-  place-items: center;
-  transition: var(--transition);
-  visibility: hidden;
-  z-index: -10;
-
-  will-change: transform, opacity;
-  transform: scale(1);
-
-  transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946),
-    opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
-  transition: height 0s ease-in 0;
-}
-
-.open-modal {
-  visibility: visible;
-  z-index: 10;
-  pointer-events: auto;
-  opacity: 1;
-}
-.modal-container {
-  background: var(--clr-white);
-  border-radius: var(--radius);
-  width: 90vw;
-  height: 30vh;
-  max-width: var(--fixed-width);
-  text-align: center;
-  display: grid;
-  place-items: center;
-  position: relative;
-}
-.close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  background: transparent;
-  border-color: transparent;
-  color: var(--clr-red-dark);
-  cursor: pointer;
-  transition: var(--transition);
-}
-.close-btn:hover {
-  color: var(--clr-red-light);
-  transform: scale(1.3);
 }

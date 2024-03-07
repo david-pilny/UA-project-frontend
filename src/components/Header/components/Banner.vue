@@ -1,3 +1,9 @@
+<script setup>
+import { useModalStore } from '@stores/modal'
+
+const modal = useModalStore()
+</script>
+
 <template>
   <!-- banner -->
   <div class="banner">
@@ -6,9 +12,9 @@
       <p>
         {{ $t('header.banner.description') }}
       </p>
-      <a href="/form" class="scroll-link btn btn-white">{{
-        $t('header.banner.button')
-      }}</a>
+      <div class="scroll-link btn btn-white" @click="() => modal.open()">
+        {{ $t('header.banner.button') }}
+      </div>
     </div>
   </div>
 </template>
