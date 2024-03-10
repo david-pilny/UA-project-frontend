@@ -18,11 +18,13 @@ import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 
 import LoadingIcon from '@core/icons/loading.vue'
 
+import { useAlertStore } from '@stores/alerts'
 import { useModalStore } from '@stores/modal'
 
 import { prepareFiles } from './services'
 
 const db = useFirestore()
+const alerts = useAlertStore()
 const modal = useModalStore()
 
 const pond = ref(null)
